@@ -1,5 +1,6 @@
 const fs = require("fs");
 const execute_shell = require("../../utilities/execute_shell");
+const path = require("path");
 
 module.exports = async(code,test_cases,class_name)=>{
     return new Promise(async(resolve,reject)=>{
@@ -10,9 +11,9 @@ module.exports = async(code,test_cases,class_name)=>{
             fs.writeFileSync(`kGenProg/example/repair_code_eg/src/example/${class_name}.java`,decoded_code);
             fs.writeFileSync(`kGenProg/example/repair_code_eg/src/example/${class_name}Test.java`,decoded_test_cases);
             const initiate_command =`java -jar kGenProg.jar -r ./ -s kGenProg/example/repair_code_eg/src/example/${class_name}.java -t kGenProg/example/repair_code_eg/src/example/${class_name}Test.java --patch-output -o ./output`
-            const response = await execute_shell(initiate_command);
-            console.log(response);
-            output_code = await  fs.readFileSync(`output/patch-v7/example.${class_name}.java`,"utf8");  
+            await execute_shell(initiate_command);
+            const output_dir = fs.readdirSync(path.join(__dirname,"../../output"));
+            output_code = await  fs.readFileSync(`output/${output_dir[0]}/example.${class_name}.java`,"utf8");  
             resolve(output_code);
         }
         catch(err){

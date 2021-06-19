@@ -12,8 +12,9 @@ module.exports = async(req,res)=>{
         });
     }
     catch(err){
-        res.status(400).json({
-            message:err.message
+        res.status(200).json({
+            message:err.message,
+            error:"No possible mutation found!"
         });
     }
 }
