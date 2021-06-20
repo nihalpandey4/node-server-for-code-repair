@@ -20,7 +20,8 @@ public class CloseToZero {
     } else {
       n++;
     }
-    n++; // bug here
+    n--;
+	n++; // bug here
     return n;
   }
 

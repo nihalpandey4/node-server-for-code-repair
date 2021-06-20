@@ -1,0 +1,12 @@
+--- example.CloseToZero
++++ example.CloseToZero
+@@ -20,7 +20,8 @@
+     } else {
+       n++;
+     }
+-    n++; // bug here
++    n--;
++	n++; // bug here
+     return n;
+   }
+ 
